@@ -10,6 +10,8 @@
   (:refer-clojure :exclude [map])
   (:require [clojure.core.reducers :as r]))
 
+(alias 'clj 'clojure.core)
+
 (defprotocol Applicative
   (map- [fs colls]))
 
@@ -40,6 +42,7 @@
          (r/map #(apply (first %) (rest %)))
          (into []))))
 
+
 (deftype ZipWith [f s]
   clojure.lang.IDeref
   (deref [_]
@@ -62,3 +65,14 @@
     clojure.lang.LazySeq (ZipWith. nil v)
     (ZipWith. v nil)))
 
+
+(deftype Reader [f]
+  clojure.lang.IFn
+  (invoke [_ config]
+    (f config))
+
+  Applicative
+  (map- [_ fns]
+    (Reader.
+     (fn [config]
+       (apply f (clj/map #(% config) fns))))))
