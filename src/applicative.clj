@@ -62,6 +62,7 @@
   (condp = (class v)
     clojure.lang.PersistentList (ZipWith. nil v)
     clojure.lang.PersistentVector (ZipWith. nil v)
+    clojure.lang.PersistentArrayMap (ZipWith. nil v)
     clojure.lang.LazySeq (ZipWith. nil v)
     (ZipWith. v nil)))
 
