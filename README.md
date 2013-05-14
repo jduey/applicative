@@ -4,7 +4,11 @@ A Clojure library for applicative functors
 
 ## Usage
 
-FIXME
+Add the following dependency to your project.clj
+
+`[net.clojure/applicative "1.0.0"]`
+
+More info at [www.clojure.net/2013/01/19/Functors/](http://www.clojure.net/2013/01/19/Functors/).
 
 ## License
 
