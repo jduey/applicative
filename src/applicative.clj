@@ -19,11 +19,12 @@
   (map- fs colls))
 
 (defn- cartesian [[coll & colls]]
-  (if (empty? colls)
-    (clojure.core/map list coll)
-    (for [x coll
-          y (cartesian colls)]
-      (cons x y))))
+  (cond
+   (empty? colls) (clojure.core/map list coll)
+   (empty? coll) (cartesian colls)
+   :else (for [x coll
+               y (cartesian colls)]
+           (cons x y))))
 
 (extend-type clojure.lang.PersistentList
   Applicative
