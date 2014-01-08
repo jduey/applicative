@@ -20,6 +20,7 @@
 
 (defn- cartesian [[coll & colls]]
   (cond
+   (and (empty? colls) (nil? coll)) [[]]
    (empty? colls) (clojure.core/map list coll)
    (empty? coll) (cartesian colls)
    :else (for [x coll
